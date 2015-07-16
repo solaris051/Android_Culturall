@@ -42,7 +42,6 @@ public class MainActivity extends Activity {
     }
 
     private void startWebView(String url) {
-
         //Create new webview Client to show progress dialog
         //When opening a url or click on link
 
