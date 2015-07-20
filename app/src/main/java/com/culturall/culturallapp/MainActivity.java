@@ -25,9 +25,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         webView = (WebView) findViewById(R.id.webView);
-        final MyJavaScriptInterface myJavaScriptInterface = new MyJavaScriptInterface(this);
-        webView.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
-
         startWebView("https://www.culturall.com/ticket/hmk");
     }
 
@@ -62,8 +59,7 @@ public class MainActivity extends Activity {
                     progressDialog.setMessage("Loading, please wait...");
                     progressDialog.show();
                 }
-                view.loadUrl("javascript:callFromActivity('bla-bla!!!!!')");
-//                view.loadUrl(url);
+                view.loadUrl(url);
 
                 return true;
             }
@@ -117,31 +113,5 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    //JavaScript interface
-    public class MyJavaScriptInterface {
-        Context mContext;
-
-        MyJavaScriptInterface(Context c) {
-            mContext = c;
-        }
-
-        @JavascriptInterface
-        public void showToast(String toast){
-            Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
-        }
-
-        @JavascriptInterface
-        public void openAndroidDialog(){
-            AlertDialog.Builder myDialog
-                    = new AlertDialog.Builder(MainActivity.this);
-            myDialog.setTitle("DANGER!");
-            myDialog.setMessage("You can do what you want!");
-            myDialog.setPositiveButton("ON", null);
-            myDialog.show();
-        }
-
     }
 }
